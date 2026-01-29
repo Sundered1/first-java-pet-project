@@ -1,33 +1,27 @@
 package com.sundered.reminder.domain;
 
-import java.time.LocalDateTime;
-
 public class Reminder {
 
     private String title;
-    private LocalDateTime reminderTime;
+    private String reminderTime;
     private ReminderStatus status;
 
-    public Reminder(String title, LocalDateTime reminderTime) {
+    public Reminder(String title, String reminderTime) {
         this.title = title;
         this.reminderTime = reminderTime;
         this.status = ReminderStatus.PENDING;
+        this.status = ReminderStatus.SENT;
     }
 
-public String getTitle() {
+    public String getTitle() {
         return title;
     }
 
-public LocalDateTime getReminderTime() {
+    public String getReminderTime() {
         return reminderTime;
     }
 
-public ReminderStatus getStatus() {
-    return status;
+    public ReminderStatus getStatus() {
+        return status;
     }
-
-public void markAsSent() {
-    this.status = ReminderStatus.SENT;
-    }
-
 }
