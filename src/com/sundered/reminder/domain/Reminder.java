@@ -10,7 +10,6 @@ public class Reminder {
         this.title = title;
         this.reminderTime = reminderTime;
         this.status = ReminderStatus.PENDING;
-        this.status = ReminderStatus.SENT;
     }
 
     public String getTitle() {
@@ -23,5 +22,13 @@ public class Reminder {
 
     public ReminderStatus getStatus() {
         return status;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setReminderTime(String reminderTime) {
+        this.reminderTime = reminderTime;
     }
 }
