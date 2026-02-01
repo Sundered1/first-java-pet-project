@@ -1,12 +1,14 @@
 package com.sundered.reminder.domain;
 
+import java.time.LocalDateTime;
+
 public class Reminder {
 
     private String title;
-    private String reminderTime;
+    private LocalDateTime reminderTime;
     private ReminderStatus status;
 
-    public Reminder(String title, String reminderTime) {
+    public Reminder(String title, LocalDateTime reminderTime) {
         this.title = title;
         this.reminderTime = reminderTime;
         this.status = ReminderStatus.PENDING;
@@ -16,7 +18,7 @@ public class Reminder {
         return title;
     }
 
-    public String getReminderTime() {
+    public LocalDateTime getReminderTime() {
         return reminderTime;
     }
 
@@ -28,7 +30,7 @@ public class Reminder {
         this.title = title;
     }
 
-    public void setReminderTime(String reminderTime) {
+    public void setReminderTime(LocalDateTime reminderTime) {
         this.reminderTime = reminderTime;
     }
 }

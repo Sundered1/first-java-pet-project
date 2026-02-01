@@ -2,10 +2,18 @@ package com.sundered.reminder.app;
 
 import com.sundered.reminder.domain.Reminder;
 import com.sundered.reminder.domain.User;
+
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Main {
+    private static final DateTimeFormatter DATE_TIME_FORMAT =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter your name: ");
@@ -30,11 +38,11 @@ public class Main {
                 System.out.println("Enter your event:");
                 String event = scanner.nextLine();
 
-                System.out.println("Enter your date/time:");
-                String reminderTime = scanner.nextLine();
+                LocalDateTime reminderTime = readDateTime(scanner, "Enter reminder date/time:");
 
                 Reminder reminder = new Reminder(event, reminderTime);
                 user.addReminder(reminder);
+
             } else if (choice.equals("2")) {
                 printReminders(user);
             } else if (choice.equals("3")) {
@@ -42,7 +50,6 @@ public class Main {
             }
 
             //EDIT REMINDERS
-
             else if (choice.equals("4")) {
                 var reminders = user.getReminders();
                 if (reminders.isEmpty()) {
@@ -88,10 +95,10 @@ public class Main {
                         System.out.println("Title updated successfully.");
                         break;
                     } else if (editChoice.equals("2")) {
-                        System.out.println("Enter new reminder date/time: ");
-                        String newDate = scanner.nextLine();
 
+                        LocalDateTime newDate = readDateTime(scanner, "Enter new reminder date/time:");
                         reminderToEdit.setReminderTime(newDate);
+
                         System.out.println("Date/time updated successfully.");
                         break;
 
@@ -114,6 +121,7 @@ public class Main {
     }
 
     private static void printReminders(User user) {
+
         var reminders = user.getReminders();
 
         if (reminders.isEmpty()) {
@@ -128,7 +136,7 @@ public class Main {
             int number = i + 1;
 
             System.out.println(number + ") Event: " + r.getTitle());
-            System.out.println("   Date/Time: " + r.getReminderTime());
+            System.out.println("   Date/Time: " + r.getReminderTime().format(DATE_TIME_FORMAT));
             System.out.println("----");
         }
     }
@@ -164,4 +172,22 @@ public class Main {
         reminders.remove(number - 1);
         System.out.println("Reminder deleted.");
     }
+
+    //PARSING localDateTime
+ private static LocalDateTime readDateTime(Scanner scanner, String prompt) {
+     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+     while (true) {
+         System.out.println(prompt);
+         System.out.println("Format: yyyy-MM-dd HH:mm (Example: 2026-01-29 16:30)");
+
+         String input = scanner.nextLine().trim();
+
+         try {
+             return LocalDateTime.parse(input, formatter);
+         } catch (DateTimeParseException e) {
+             System.out.println("Invalid date/time format. Please try again.");
+         }
+     }
+ }
 }
