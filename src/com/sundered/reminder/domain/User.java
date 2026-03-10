@@ -8,6 +8,10 @@ public class User {
     private String email;
     private List<Reminder> reminders = new ArrayList<>();
 
+    public User(){
+
+    }
+
     public User(String name, String email) {
         this.name = name;
         this.email = email;

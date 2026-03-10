@@ -8,6 +8,10 @@ public class Reminder {
     private LocalDateTime reminderTime;
     private ReminderStatus status;
 
+    public Reminder(){
+
+    }
+
     public Reminder(String title, LocalDateTime reminderTime) {
         this.title = title;
         this.reminderTime = reminderTime;

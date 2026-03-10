@@ -1,0 +1,9 @@
+[ {
+  "name" : "Dima",
+  "email" : "dfurm@gmail.com",
+  "reminders" : [ {
+    "title" : "Walk",
+    "reminderTime" : [ 2026, 3, 29, 16, 30 ],
+    "status" : "PENDING"
+  } ]
+} ]
